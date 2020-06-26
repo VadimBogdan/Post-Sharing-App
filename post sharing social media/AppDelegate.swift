@@ -7,14 +7,24 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
+    
+    var appCoordinator: Coordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        guard #available(iOS 13, *) else {
+            window = UIWindow()
+            appCoordinator = AppCoordinator(window: window!)
+            appCoordinator.start()
+            return true
+            // FirebaseApp.configure()
+        }
         return true
     }
 

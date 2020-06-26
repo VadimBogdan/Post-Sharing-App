@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>971593698551-qvcsu3ilq9ak0i90ku8dknrfgljlgbo3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.971593698551-qvcsu3ilq9ak0i90ku8dknrfgljlgbo3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDQjcL6ZrQyfYhfxUQz-jknuvL3uwAcgZw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>971593698551</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ios.training.post-sharing-social-media</string>
+	<key>PROJECT_ID</key>
+	<string>my-pet-project-54378</string>
+	<key>STORAGE_BUCKET</key>
+	<string>my-pet-project-54378.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:971593698551:ios:b1241816cd4b921c0997f2</string>
+	<key>DATABASE_URL</key>
+	<string>https://my-pet-project-54378.firebaseio.com</string>
+</dict>
+</plist>
