@@ -13,6 +13,8 @@ class BaseCoordinator: Coordinator {
     
     var children: [Coordinator] = []
     
+    var isCompleted: (() -> Void)?
+    
     func start() {
         fatalError("BaseCoordinator.start() -> Method MUST BE overridden in subclasses")
     }

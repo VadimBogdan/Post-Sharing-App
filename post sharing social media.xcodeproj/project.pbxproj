@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		847416381430D064AA80A8D1 /* Pods_post_sharing_social_mediaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED914818A9E896B624201E3B /* Pods_post_sharing_social_mediaTests.framework */; };
 		BFFF611A085257039D2AFB8C /* Pods_post_sharing_social_media_post_sharing_social_mediaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E0D5193F485FFAA803AC72 /* Pods_post_sharing_social_media_post_sharing_social_mediaUITests.framework */; };
+		DD56F2D224A7325900865FFC /* LaunchScreenConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2D124A7325900865FFC /* LaunchScreenConstants.swift */; };
+		DD56F2D524A735B200865FFC /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2D424A735B200865FFC /* PostTableViewCell.swift */; };
+		DD56F2D824A741CB00865FFC /* TableViewCellsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2D724A741CB00865FFC /* TableViewCellsConstants.swift */; };
+		DD56F2DB24A747D800865FFC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2DA24A747D800865FFC /* Post.swift */; };
+		DD56F2E024A75A1500865FFC /* PostSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2DF24A75A1500865FFC /* PostSection.swift */; };
+		DD56F2E324A75C6900865FFC /* Post + IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2E224A75C6900865FFC /* Post + IdentifiableType.swift */; };
+		DD56F2E624A7B03C00865FFC /* String + FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2E524A7B03C00865FFC /* String + FontSize.swift */; };
+		DD56F2E924A7B7E300865FFC /* PostTableViewCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2E824A7B7E300865FFC /* PostTableViewCellConstants.swift */; };
+		DD56F2EC24A7D28700865FFC /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD56F2EB24A7D28700865FFC /* Gradient.swift */; };
 		DD590AB624A5CCF20015980C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD590AB524A5CCF20015980C /* AppCoordinator.swift */; };
 		DD590AB924A5CD8D0015980C /* UIViewController + Drawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD590AB824A5CD8D0015980C /* UIViewController + Drawable.swift */; };
 		DD590ABC24A5CE5C0015980C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD590ABB24A5CE5B0015980C /* Router.swift */; };
@@ -17,10 +26,12 @@
 		DD590AC324A5DC740015980C /* AppUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD590AC224A5DC740015980C /* AppUINavigationController.swift */; };
 		DD590AC524A60FF60015980C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD590AC424A60FF60015980C /* LaunchScreen.xib */; };
 		DD590AC824A624260015980C /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD590AC724A624260015980C /* LaunchScreenManager.swift */; };
+		DD5AFB1524A8B97300808953 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5AFB1424A8B97300808953 /* CreatePostViewController.swift */; };
 		DD89BCEF24A51A3E00E0F32A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD89BCEE24A51A3E00E0F32A /* Coordinator.swift */; };
 		DD89BCF124A51AC000E0F32A /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD89BCF024A51AC000E0F32A /* BaseCoordinator.swift */; };
 		DDC43EEF24A6675500A00409 /* HallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC43EEE24A6675500A00409 /* HallViewController.swift */; };
 		DDC43EF224A6677900A00409 /* HallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC43EF124A6677900A00409 /* HallViewModel.swift */; };
+		DDC43EF424A66F8D00A00409 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC43EF324A66F8D00A00409 /* ViewModelType.swift */; };
 		DDD09A2D24A35E74003B01F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDD09A2C24A35E74003B01F1 /* GoogleService-Info.plist */; };
 		DDDF7D9E24A34DEE0018E8C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF7D9D24A34DEE0018E8C5 /* AppDelegate.swift */; };
 		DDDF7DA024A34DEE0018E8C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF7D9F24A34DEE0018E8C5 /* SceneDelegate.swift */; };
@@ -55,6 +66,15 @@
 		51B22B956374E533A731BDBB /* Pods-post sharing social mediaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-post sharing social mediaTests.release.xcconfig"; path = "Target Support Files/Pods-post sharing social mediaTests/Pods-post sharing social mediaTests.release.xcconfig"; sourceTree = "<group>"; };
 		65E0D5193F485FFAA803AC72 /* Pods_post_sharing_social_media_post_sharing_social_mediaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_post_sharing_social_media_post_sharing_social_mediaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A4497106A05FB329A48618 /* Pods-post sharing social media-post sharing social mediaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-post sharing social media-post sharing social mediaUITests.debug.xcconfig"; path = "Target Support Files/Pods-post sharing social media-post sharing social mediaUITests/Pods-post sharing social media-post sharing social mediaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD56F2D124A7325900865FFC /* LaunchScreenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenConstants.swift; sourceTree = "<group>"; };
+		DD56F2D424A735B200865FFC /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		DD56F2D724A741CB00865FFC /* TableViewCellsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellsConstants.swift; sourceTree = "<group>"; };
+		DD56F2DA24A747D800865FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		DD56F2DF24A75A1500865FFC /* PostSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSection.swift; sourceTree = "<group>"; };
+		DD56F2E224A75C6900865FFC /* Post + IdentifiableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post + IdentifiableType.swift"; sourceTree = "<group>"; };
+		DD56F2E524A7B03C00865FFC /* String + FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + FontSize.swift"; sourceTree = "<group>"; };
+		DD56F2E824A7B7E300865FFC /* PostTableViewCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCellConstants.swift; sourceTree = "<group>"; };
+		DD56F2EB24A7D28700865FFC /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		DD590AB524A5CCF20015980C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DD590AB824A5CD8D0015980C /* UIViewController + Drawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Drawable.swift"; sourceTree = "<group>"; };
 		DD590ABB24A5CE5B0015980C /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -63,10 +83,12 @@
 		DD590AC224A5DC740015980C /* AppUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUINavigationController.swift; sourceTree = "<group>"; };
 		DD590AC424A60FF60015980C /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DD590AC724A624260015980C /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
+		DD5AFB1424A8B97300808953 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		DD89BCEE24A51A3E00E0F32A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DD89BCF024A51AC000E0F32A /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		DDC43EEE24A6675500A00409 /* HallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallViewController.swift; sourceTree = "<group>"; };
 		DDC43EF124A6677900A00409 /* HallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallViewModel.swift; sourceTree = "<group>"; };
+		DDC43EF324A66F8D00A00409 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		DDD09A2C24A35E74003B01F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DDDF7D9A24A34DEE0018E8C5 /* post sharing social media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "post sharing social media.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDF7D9D24A34DEE0018E8C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +158,74 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DD56F2D024A7323800865FFC /* UI Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2E824A7B7E300865FFC /* PostTableViewCellConstants.swift */,
+				DD56F2D124A7325900865FFC /* LaunchScreenConstants.swift */,
+				DD56F2D724A741CB00865FFC /* TableViewCellsConstants.swift */,
+			);
+			path = "UI Constants";
+			sourceTree = "<group>";
+		};
+		DD56F2D324A7358600865FFC /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2D424A735B200865FFC /* PostTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		DD56F2D624A73F6E00865FFC /* PostViews */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2D324A7358600865FFC /* TableViewCells */,
+			);
+			path = PostViews;
+			sourceTree = "<group>";
+		};
+		DD56F2D924A747C700865FFC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2DE24A75A0500865FFC /* Post */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DD56F2DE24A75A0500865FFC /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2E124A75B6B00865FFC /* RxDataSource PostSection */,
+				DD56F2DA24A747D800865FFC /* Post.swift */,
+				DD56F2E224A75C6900865FFC /* Post + IdentifiableType.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		DD56F2E124A75B6B00865FFC /* RxDataSource PostSection */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2DF24A75A1500865FFC /* PostSection.swift */,
+			);
+			path = "RxDataSource PostSection";
+			sourceTree = "<group>";
+		};
+		DD56F2E424A7B02000865FFC /* Foundation Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2E524A7B03C00865FFC /* String + FontSize.swift */,
+			);
+			path = "Foundation Extensions";
+			sourceTree = "<group>";
+		};
+		DD56F2EA24A7D27100865FFC /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				DD56F2EB24A7D28700865FFC /* Gradient.swift */,
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
 		DD590AB724A5CD330015980C /* Routers */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,8 +247,9 @@
 		DD590AC124A5DC470015980C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DD5AFB1624A8B98100808953 /* ActionViewControllers */,
+				DDC43EF524A67B9000A00409 /* HallViewController */,
 				DD590AC224A5DC740015980C /* AppUINavigationController.swift */,
-				DDC43EEE24A6675500A00409 /* HallViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -170,6 +261,14 @@
 				DD590AC424A60FF60015980C /* LaunchScreen.xib */,
 			);
 			path = Launch;
+			sourceTree = "<group>";
+		};
+		DD5AFB1624A8B98100808953 /* ActionViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD5AFB1424A8B97300808953 /* CreatePostViewController.swift */,
+			);
+			path = ActionViewControllers;
 			sourceTree = "<group>";
 		};
 		DD89BCED24A51A2300E0F32A /* Coordinators */ = {
@@ -187,8 +286,17 @@
 			isa = PBXGroup;
 			children = (
 				DDC43EF124A6677900A00409 /* HallViewModel.swift */,
+				DDC43EF324A66F8D00A00409 /* ViewModelType.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DDC43EF524A67B9000A00409 /* HallViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DDC43EEE24A6675500A00409 /* HallViewController.swift */,
+			);
+			path = HallViewController;
 			sourceTree = "<group>";
 		};
 		DDDF7D9124A34DEE0018E8C5 = {
@@ -216,11 +324,16 @@
 		DDDF7D9C24A34DEE0018E8C5 /* post sharing social media */ = {
 			isa = PBXGroup;
 			children = (
+				DD56F2EA24A7D27100865FFC /* UI Components */,
+				DD56F2E424A7B02000865FFC /* Foundation Extensions */,
+				DD56F2D924A747C700865FFC /* Models */,
+				DD56F2D624A73F6E00865FFC /* PostViews */,
 				DDC43EF024A6676500A00409 /* ViewModels */,
 				DD590AC124A5DC470015980C /* ViewControllers */,
 				DD590AB724A5CD330015980C /* Routers */,
 				DD89BCED24A51A2300E0F32A /* Coordinators */,
 				DD590AC624A623F20015980C /* Launch */,
+				DD56F2D024A7323800865FFC /* UI Constants */,
 				DDDF7D9D24A34DEE0018E8C5 /* AppDelegate.swift */,
 				DDDF7D9F24A34DEE0018E8C5 /* SceneDelegate.swift */,
 				DDDF7DA624A34DF10018E8C5 /* Assets.xcassets */,
@@ -489,17 +602,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5AFB1524A8B97300808953 /* CreatePostViewController.swift in Sources */,
+				DD56F2D224A7325900865FFC /* LaunchScreenConstants.swift in Sources */,
 				DD590ABC24A5CE5C0015980C /* Router.swift in Sources */,
+				DD56F2E924A7B7E300865FFC /* PostTableViewCellConstants.swift in Sources */,
 				DDC43EEF24A6675500A00409 /* HallViewController.swift in Sources */,
 				DD590AB924A5CD8D0015980C /* UIViewController + Drawable.swift in Sources */,
+				DD56F2D824A741CB00865FFC /* TableViewCellsConstants.swift in Sources */,
 				DD590AB624A5CCF20015980C /* AppCoordinator.swift in Sources */,
+				DD56F2EC24A7D28700865FFC /* Gradient.swift in Sources */,
 				DD89BCF124A51AC000E0F32A /* BaseCoordinator.swift in Sources */,
 				DD89BCEF24A51A3E00E0F32A /* Coordinator.swift in Sources */,
 				DD590AC024A5D9630015980C /* HallCoordinator.swift in Sources */,
 				DD590ABE24A5CF7E0015980C /* AppRouter.swift in Sources */,
 				DD590AC324A5DC740015980C /* AppUINavigationController.swift in Sources */,
+				DD56F2E324A75C6900865FFC /* Post + IdentifiableType.swift in Sources */,
+				DD56F2E624A7B03C00865FFC /* String + FontSize.swift in Sources */,
+				DD56F2E024A75A1500865FFC /* PostSection.swift in Sources */,
+				DDC43EF424A66F8D00A00409 /* ViewModelType.swift in Sources */,
+				DD56F2D524A735B200865FFC /* PostTableViewCell.swift in Sources */,
 				DDDF7D9E24A34DEE0018E8C5 /* AppDelegate.swift in Sources */,
 				DD590AC824A624260015980C /* LaunchScreenManager.swift in Sources */,
+				DD56F2DB24A747D800865FFC /* Post.swift in Sources */,
 				DDC43EF224A6677900A00409 /* HallViewModel.swift in Sources */,
 				DDDF7DA024A34DEE0018E8C5 /* SceneDelegate.swift in Sources */,
 			);
@@ -670,6 +794,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LCRZABQ3TM;
 				INFOPLIST_FILE = "post sharing social media/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -689,6 +814,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LCRZABQ3TM;
 				INFOPLIST_FILE = "post sharing social media/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

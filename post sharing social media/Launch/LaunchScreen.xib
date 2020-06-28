@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,38 +14,26 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQ6-WF-YRt">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loadingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-gp-hq3">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loadingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-gp-hq3">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendLoading" translatesAutoresizingMaskIntoConstraints="NO" id="KXl-xG-iej" userLabel="send-2">
-                            <rect key="frame" x="158" y="260.66666666666669" width="85" height="85"/>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendOval" translatesAutoresizingMaskIntoConstraints="NO" id="2gk-GI-3Bw" userLabel="sendOval-1">
-                            <rect key="frame" x="132" y="228" width="150" height="150"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstItem="2gk-GI-3Bw" firstAttribute="top" secondItem="dQ6-WF-YRt" secondAttribute="top" constant="228" id="6ia-aJ-bfN"/>
-                        <constraint firstItem="Zvv-gp-hq3" firstAttribute="top" secondItem="dQ6-WF-YRt" secondAttribute="top" id="Eh9-dO-df1"/>
-                        <constraint firstAttribute="bottom" secondItem="Zvv-gp-hq3" secondAttribute="bottom" id="HQI-r7-keK"/>
-                        <constraint firstItem="Zvv-gp-hq3" firstAttribute="leading" secondItem="dQ6-WF-YRt" secondAttribute="leading" id="Mko-nr-lJ7"/>
-                        <constraint firstAttribute="trailing" secondItem="Zvv-gp-hq3" secondAttribute="trailing" id="cOa-Dw-bhg"/>
-                        <constraint firstItem="2gk-GI-3Bw" firstAttribute="leading" secondItem="KXl-xG-iej" secondAttribute="trailing" constant="-111" id="ofl-hD-o1w"/>
-                        <constraint firstItem="2gk-GI-3Bw" firstAttribute="centerX" secondItem="dQ6-WF-YRt" secondAttribute="centerX" id="sLQ-MX-hHK"/>
-                        <constraint firstItem="KXl-xG-iej" firstAttribute="centerY" secondItem="2gk-GI-3Bw" secondAttribute="centerY" id="trV-bF-Npb"/>
-                    </constraints>
-                </view>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendLoading" translatesAutoresizingMaskIntoConstraints="NO" id="KXl-xG-iej" userLabel="send-2">
+                    <rect key="frame" x="159" y="188" width="85" height="85"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendOval" translatesAutoresizingMaskIntoConstraints="NO" id="2gk-GI-3Bw" userLabel="sendOval-1">
+                    <rect key="frame" x="132" y="150" width="150" height="150"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="dQ6-WF-YRt" secondAttribute="bottom" id="WqW-rx-bet"/>
-                <constraint firstItem="dQ6-WF-YRt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mTe-vd-ksV"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dQ6-WF-YRt" secondAttribute="trailing" id="pvI-MK-TIm"/>
-                <constraint firstItem="dQ6-WF-YRt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u4P-2j-Xbd"/>
+                <constraint firstItem="KXl-xG-iej" firstAttribute="top" secondItem="2gk-GI-3Bw" secondAttribute="bottom" constant="-112" id="0tM-jX-BZN"/>
+                <constraint firstItem="2gk-GI-3Bw" firstAttribute="leading" secondItem="KXl-xG-iej" secondAttribute="trailing" constant="-112" id="EY4-Sb-IdB"/>
+                <constraint firstItem="Zvv-gp-hq3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GeI-HC-WmF"/>
+                <constraint firstAttribute="bottom" secondItem="Zvv-gp-hq3" secondAttribute="bottom" id="cGh-44-vjZ"/>
+                <constraint firstItem="Zvv-gp-hq3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pJb-JL-Qfq"/>
+                <constraint firstItem="Zvv-gp-hq3" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="ryo-9G-mwG"/>
+                <constraint firstItem="2gk-GI-3Bw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sVg-IT-iFy"/>
+                <constraint firstItem="2gk-GI-3Bw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="wm0-2h-xdj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>

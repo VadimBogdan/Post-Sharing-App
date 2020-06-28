@@ -16,6 +16,8 @@ final class LaunchScreenManager {
         return loadLaunchView()
     }()
     private weak var parentView: UIView!
+    private var animatedOvalView: UIView!
+    private var ovalFrame: CGRect!
     
     private init() {}
     
@@ -45,19 +47,24 @@ final class LaunchScreenManager {
         let ovalFrame = sendOvalView.frame,
             sendFrame = sendView.frame
         
+        self.ovalFrame = ovalFrame
+        
         sendOvalView.isHidden = true
+
+        // act
         
         sendView.frame = sendFrame
                 
-        let animatedOval = UIView()
-        view.addSubview(animatedOval)
+        animatedOvalView = UIView()
+        view.addSubview(animatedOvalView)
         
-        animatedOval.frame = ovalFrame
+        animatedOvalView.frame = animatedOvalRect()
         
         let gradient = CAGradientLayer()
         gradient.frame = CGRect(origin: .zero, size: ovalFrame.size)
         gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
 
+        
         let shape = CAShapeLayer()
         shape.lineWidth = 5
         shape.path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 2.5, y: 2.5),
@@ -68,6 +75,8 @@ final class LaunchScreenManager {
         shape.fillColor = UIColor.clear.cgColor
         gradient.mask = shape
         
+        // this is for fixing animated oval frame when device is rotated
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceRotated), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
         
         let animationStrokeStart = CABasicAnimation(keyPath: "strokeStart")
         animationStrokeStart.fromValue = 0
@@ -88,12 +97,36 @@ final class LaunchScreenManager {
                 
         shape.add(animationGroup, forKey: "MyAnimation")
         
-        UIView.animate(withDuration: 1.5, delay: 1.75, usingSpringWithDamping: 0.5, initialSpringVelocity: 1,
+        animatedOvalView.layer.addSublayer(gradient)
+        
+        UIView.animate(withDuration: 0.75, delay: 1.75, usingSpringWithDamping: 1, initialSpringVelocity: 0.5,
                        options: .curveEaseOut,
                        animations: { self.view.alpha = 0 },
-                       completion: { result in self.view.removeFromSuperview() })
+                       completion: { result in
+                        self.parentView = nil
+                        self.animatedOvalView.removeFromSuperview()
+                        self.animatedOvalView = nil
+                        self.view.removeFromSuperview()
+                        sendView.removeFromSuperview()
+                        NotificationCenter.default.removeObserver(self, name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+                    })
+        
+    }
+    
+    @objc fileprivate func deviceRotated() {
+        animatedOvalView.frame = animatedOvalRect()
+    }
+    
+}
 
-        animatedOval.layer.addSublayer(gradient)
+extension LaunchScreenManager {
+    
+    fileprivate func screenXCenter() -> CGFloat {
+        return (view.bounds.size.width / 2) - ovalFrame.width / 2
+    }
+    
+    fileprivate func animatedOvalRect() -> CGRect {
+        return CGRect(x: screenXCenter(), y: LaunchScreenConstants.ovalConstraintConstant, width: ovalFrame.width, height: ovalFrame.height)
     }
 }
 

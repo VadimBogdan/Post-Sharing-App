@@ -1,14 +1,14 @@
 //
-//  HallVC.swift
+//  CreatePostViewController.swift
 //  post sharing social media
 //
-//  Created by Вадим on 26.06.2020.
+//  Created by Вадим on 28.06.2020.
 //  Copyright © 2020 Vadym Bogdan. All rights reserved.
 //
 
 import UIKit
 
-class HallViewController: UIViewController {
+class CreatePostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

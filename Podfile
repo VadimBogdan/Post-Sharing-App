@@ -22,5 +22,6 @@ target 'post sharing social media' do
     # https://firebase.google.com/docs/ios/setup#available-pods
     pod 'RxSwift', '~> 5'
     pod 'RxCocoa', '~> 5'
+    pod 'RxDataSources', '~> 4.0'
 
 end
