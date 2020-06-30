@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 struct PostTableViewCellConstants {
-    public static let titleTopOffset: CGFloat = 8.0
-    public static let titleLeftOffset: CGFloat = 8.0
+    public static let titleTop: CGFloat = 8.0
+    public static let titleLeft: CGFloat = 8.0
     
-    public static let creationDateTopOffsetToTitleBottom: CGFloat = 0.0
-    public static let creationDateLeftOffset: CGFloat = 8.0
+    public static let creationDateTopToTitleBottom: CGFloat = 0.0
+    public static let creationDateLeft: CGFloat = 8.0
     
-    public static let bodyTopOffsetToCreationDateBottom: CGFloat = 12.0
-    public static let bodyLeftOffset: CGFloat = 12.0
-    public static let bodyRightOffset: CGFloat = -60.0
-    public static let bodyBottomOffset: CGFloat = 16.0
+    public static let bodyTopToCreationDateBottom: CGFloat = 12.0
+    public static let bodyLeft: CGFloat = 12.0
+    public static let bodyRight: CGFloat = -60.0
+    public static let bodyBottom: CGFloat = 16.0
 }
 

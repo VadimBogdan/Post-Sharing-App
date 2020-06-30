@@ -14,4 +14,6 @@ protocol Router {
     func push(_ drawable: Drawable, animated: Bool, OnNavigateBack: NavigationBackAction?)
     func pop(_ animated: Bool)
     func popToRoot(_ animated: Bool)
+    
+    func present(_ drawable: Drawable, isAnimated: Bool, onDismiss closure: NavigationBackAction?)
 }

@@ -34,6 +34,18 @@ class AppRouter: NSObject, Router {
         navigationController.pushViewController(viewController, animated: animated)
     }
     
+    func present(_ drawable: Drawable, isAnimated: Bool, onDismiss closure: NavigationBackAction?) {
+        
+        guard let viewController = drawable.viewController else { return }
+        
+        if let closure = closure {
+            closures.updateValue(closure, forKey: viewController.description)
+        }
+        
+        navigationController.present(viewController, animated: true, completion: closure)
+        viewController.presentationController?.delegate = self
+    }
+    
     func pop(_ animated: Bool) {
         navigationController.popViewController(animated: animated)
     }
@@ -42,7 +54,20 @@ class AppRouter: NSObject, Router {
         navigationController.popToRootViewController(animated: animated)
     }
     
+    func executeClosure(_ viewController: UIViewController) {
+        guard let closure = closures.removeValue(forKey: viewController.description) else {
+            return
+        }
+        closure()
+    }
     
+}
+
+extension AppRouter: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        executeClosure(presentationController.presentedViewController)
+    }
 }
 
 extension AppRouter: UINavigationControllerDelegate {
@@ -53,5 +78,7 @@ extension AppRouter: UINavigationControllerDelegate {
             !navigationController.viewControllers.contains(previousVC) else {
             return
         }
+                
+        executeClosure(previousVC)
     }
 }

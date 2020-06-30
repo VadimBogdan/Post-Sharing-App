@@ -42,6 +42,27 @@ class HallCoordinator: BaseCoordinator {
 extension HallCoordinator {
     
     func toCreatePost() {
+        let createPostViewController = CreatePostViewController()
+        createPostViewController.viewModelBuilder = { [bag, unowned createPostViewController] input in
+            
+            let viewModel = CreatePostViewModel(input: input)
+            
+            input.cancelTrigger
+                 .drive(onNext:
+                    {
+                        createPostViewController.presentingViewController?.dismiss(animated: true)
+                    })
+                 .disposed(by: bag)
+            
+            return viewModel
+        }
         
+        let navigationController = UINavigationController()
+        navigationController.pushViewController(createPostViewController, animated: false)
+        
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.modalTransitionStyle = .coverVertical
+        
+        router.present(navigationController, isAnimated: true, onDismiss: nil)
     }
 }

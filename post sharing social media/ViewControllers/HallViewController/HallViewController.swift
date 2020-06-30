@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxRelay
 import RxDataSources
 
 class HallViewController: UIViewController {
@@ -17,7 +16,7 @@ class HallViewController: UIViewController {
     var viewModelBuilder: HallViewModel.ViewModelBuilder!
     
     fileprivate let tableView = UITableView()
-    fileprivate let createPostButton = UIButton()
+    fileprivate let createPostButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
     
     fileprivate var viewModel: HallViewModel!
     
@@ -52,30 +51,39 @@ class HallViewController: UIViewController {
         
     }
     
-    fileprivate func setupBindings() {
-        viewModel.output.posts.drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: bag)
-    }
-    
     fileprivate func setupUI() {
         setupNavbar()
         setupTableView()
     }
     
+    fileprivate func setupBindings() {
+        viewModel.output.posts.drive(tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+    }
+    
     fileprivate func setupNavbar() {
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //self.navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.8666666667, green: 0.8745098039, blue: 0.8941176471, alpha: 1)
         //self.navigationController?.navigationBar.isTranslucent = true
         setupNavbarRightItems()
     }
     
     fileprivate func setupNavbarRightItems() {
-        let img = UIImage(named: "exam")
-        createPostButton.setImage(img, for: .normal)
-        createPostButton.showsTouchWhenHighlighted = true
-        let barButton = UIBarButtonItem(customView: createPostButton)
+        //let img = UIImage(named: "exam")
+        createPostButton.tintColor = #colorLiteral(red: 0, green: 0.09277493507, blue: 0.2684116662, alpha: 1)
+        createPostButton.title = "Add post"
+        createPostButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0.07141517848, blue: 0.2006644607, alpha: 1)], for: .normal)
         
-        navigationItem.setLeftBarButtonItems([barButton], animated: true)
+        
+        // createPostButton.setBackgroundImage(img, for: .normal)
+        // createPostButton.showsTouchWhenHighlighted = true
+        
+        //
+        
+        // let barButton = UIBarButtonItem(customView: createPostButton)
+        
+        navigationItem.setLeftBarButtonItems([createPostButton], animated: true)
     }
     
     fileprivate func setupTableView() {

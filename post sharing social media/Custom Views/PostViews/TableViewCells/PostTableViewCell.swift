@@ -52,10 +52,10 @@ class PostTableViewCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         creationDateLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let constraints = [titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: PostTableViewCellConstants.titleTopOffset),
-                titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PostTableViewCellConstants.titleLeftOffset),
-                creationDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: PostTableViewCellConstants.creationDateTopOffsetToTitleBottom),
-                creationDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PostTableViewCellConstants.creationDateLeftOffset)]
+        let constraints = [titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: PostTableViewCellConstants.titleTop),
+                titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PostTableViewCellConstants.titleLeft),
+                creationDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: PostTableViewCellConstants.creationDateTopToTitleBottom),
+                creationDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PostTableViewCellConstants.creationDateLeft)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -72,10 +72,10 @@ class PostTableViewCell: UITableViewCell {
         
         bodyTextView.translatesAutoresizingMaskIntoConstraints = false
         
-        let constraints = [bodyTextView.topAnchor.constraint(equalTo: creationDateLabel.bottomAnchor, constant: PostTableViewCellConstants.bodyTopOffsetToCreationDateBottom),
-            bodyTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PostTableViewCellConstants.bodyLeftOffset),
-            bodyTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: PostTableViewCellConstants.bodyRightOffset),
-            bodyTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: PostTableViewCellConstants.bodyBottomOffset)]
+        let constraints = [bodyTextView.topAnchor.constraint(equalTo: creationDateLabel.bottomAnchor, constant: PostTableViewCellConstants.bodyTopToCreationDateBottom),
+            bodyTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PostTableViewCellConstants.bodyLeft),
+            bodyTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: PostTableViewCellConstants.bodyRight),
+            bodyTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: PostTableViewCellConstants.bodyBottom)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -115,9 +115,9 @@ extension PostTableViewCell {
             creationDateSize = placeholder.sizeOfString(withFont: UIFont.preferredFont(forTextStyle: .subheadline))
         let heightOfLabels = (titleHeightSize.height + creationDateSize.height).rounded(.toNearestOrEven)
         
-        let heightOfConstraints = PostTableViewCellConstants.titleTopOffset +
-                                PostTableViewCellConstants.creationDateTopOffsetToTitleBottom +
-                                PostTableViewCellConstants.bodyTopOffsetToCreationDateBottom
+        let heightOfConstraints = PostTableViewCellConstants.titleTop +
+                                PostTableViewCellConstants.creationDateTopToTitleBottom +
+                                PostTableViewCellConstants.bodyTopToCreationDateBottom
         
         let totalHeight = heightOfLabels + heightOfConstraints
         ///

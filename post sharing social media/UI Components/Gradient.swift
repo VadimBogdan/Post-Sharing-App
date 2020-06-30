@@ -33,7 +33,7 @@ struct Gradient {
     
     fileprivate static func yOrigin(_ yViewsOffset: CGFloat) -> CGFloat {
         return yViewsOffset +
-            PostTableViewCellConstants.titleTopOffset +
-            PostTableViewCellConstants.creationDateTopOffsetToTitleBottom + 6
+            PostTableViewCellConstants.titleTop +
+            PostTableViewCellConstants.creationDateTopToTitleBottom + 6
     }
 }
