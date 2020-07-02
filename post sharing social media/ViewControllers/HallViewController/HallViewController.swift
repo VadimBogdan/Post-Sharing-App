@@ -112,6 +112,7 @@ class HallViewController: UIViewController {
         tableView
             .rx.setDelegate(self)
             .disposed(by: bag)
+        
     }
 
     /*

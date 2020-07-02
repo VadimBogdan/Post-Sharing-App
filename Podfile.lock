@@ -65,6 +65,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - QueryKit (0.14.1)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -78,9 +79,9 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
-  - RxCocoa (~> 5)
+  - QueryKit
   - RxDataSources (~> 4.0)
-  - RxSwift (~> 5)
+  - RxSwift (~> 5.0)
 
 SPEC REPOS:
   trunk:
@@ -96,6 +97,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - QueryKit
     - RxCocoa
     - RxDataSources
     - RxRelay
@@ -114,11 +116,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  QueryKit: 60dae8ff75d5805f9c703c68c0ef4294c9dd7de6
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: bff3437b1e54700608d44e75801ba9a44d8ccad0
+PODFILE CHECKSUM: c6813110cd25b5bfc3c800ea5455a14f2d9b7f09
 
 COCOAPODS: 1.9.3
