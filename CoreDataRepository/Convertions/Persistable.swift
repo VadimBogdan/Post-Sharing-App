@@ -10,22 +10,19 @@ import Foundation
 import CoreData
 import QueryKit
 
-protocol Persistable: NSFetchRequestResult {
+public protocol Persistable: NSFetchRequestResult & ModelConvertibleType {
     
     static var entityName: String { get }
     
     /// The attribute name to be used to uniquely identify each instance.
     static var primaryAttribute: Attribute<String> { get }
     
-    /* predicate to uniquely identify the record, such as: NSPredicate(format: "code == '\(code)'") */
-    static func predicate() -> NSPredicate
-    
-    // static func fetchRequest() -> NSFetchRequest<Self>
+    static func fetchRequest() -> NSFetchRequest<Self>
 }
 
 extension Persistable {
 
-    static var primaryAttribute: Attribute<String> {
-        return Attribute("uid")
+    public static var primaryAttribute: Attribute<String> {
+        return Attribute("uuid")
     }
 }

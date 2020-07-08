@@ -10,15 +10,15 @@ import Foundation
 import CoreData
 import RxSwift
 
-final class FetchedResultsControllerEntityObserver<C: CoreDataRepresentable> : NSObject, NSFetchedResultsControllerDelegate {
+final class FetchedResultsControllerEntityObserver<T: NSFetchRequestResult> : NSObject, NSFetchedResultsControllerDelegate {
     
-    typealias Observer = AnyObserver<[C.CoreDataType]>
+    typealias Observer = AnyObserver<[T]>
     
     private let observer: Observer
-    private let frc: NSFetchedResultsController<C.CoreDataType>
+    private let frc: NSFetchedResultsController<T>
     
     
-    init(observer: Observer, fetchRequest: NSFetchRequest<C.CoreDataType>, managedObjectContext context: NSManagedObjectContext, sectionNameKeyPath: String?, cacheName: String?) {
+    init(observer: Observer, fetchRequest: NSFetchRequest<T>, managedObjectContext context: NSManagedObjectContext, sectionNameKeyPath: String?, cacheName: String?) {
         self.observer = observer
         
 

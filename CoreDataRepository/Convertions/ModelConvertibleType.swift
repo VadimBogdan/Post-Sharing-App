@@ -10,28 +10,22 @@ import Foundation
 import CoreData
 import RxSwift
 
-protocol ModelConvertibleType {
+public protocol ModelConvertibleType {
     associatedtype ModelType
     
     func asModel() -> ModelType
 }
 
-protocol CoreDataRepresentable {
+public protocol CoreDataRepresentable {
     associatedtype CoreDataType: Persistable
     
-    var uid: String { get }
-    
-    init(entity: CoreDataType)
+    var uuid: String { get }
     
     func update(_ entity: CoreDataType)
 }
 
 extension CoreDataRepresentable {
-//    func sync(in context: NSManagedObjectContext) -> Observable<CoreDataType> {
-//        /**
-//            I am currently stopped here
-//            implementation will change
-//        */
-//        // return context.rx
-//    }
+    func sync(in context: NSManagedObjectContext) -> Observable<CoreDataType> {
+        return context.rx.sync(uuid: uuid)
+    }
 }

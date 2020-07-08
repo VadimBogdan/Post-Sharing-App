@@ -32,6 +32,11 @@ class CreatePostViewController: UIViewController {
     fileprivate let confirmButton = UIButton()
     fileprivate let cancelButton = UIButton()
     
+    fileprivate let confirmBarButton = UIBarButtonItem()
+    fileprivate let cancelBarButton = UIBarButtonItem()
+    
+    fileprivate let bag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildViewModel()
@@ -70,7 +75,9 @@ class CreatePostViewController: UIViewController {
     fileprivate func buildViewModel() {
         viewModel = viewModelBuilder(CreatePostViewModel.Input(
             cancelTrigger: cancelButton.rx.tap.asDriver(),
-            confirmTrigger: confirmButton.rx.tap.asDriver()
+            confirmTrigger: confirmButton.rx.tap.asDriver(),
+            body: bodyTextView.rx.text.orEmpty.asDriver(),
+            title: titleTextField.rx.text.orEmpty.asDriver()
         ))
     }
     
@@ -83,7 +90,11 @@ class CreatePostViewController: UIViewController {
     }
     
     fileprivate func setupBindings() {
-        
+        // canConfirm applied to confirmBarButton instead of confirmButton
+        // because it correctly enable/disable button
+        viewModel.output.canConfirm
+            .drive(confirmBarButton.rx.isEnabled)
+            .disposed(by: bag)
     }
     
     fileprivate func setupNavbar() {
@@ -91,20 +102,20 @@ class CreatePostViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.02489590272, green: 0.3996174932, blue: 0.7851334214, alpha: 1)
         navigationController?.navigationBar.isTranslucent = false
         
-        let verifyImg = UIImage(named: "correct"),
+        let confirmImg = UIImage(named: "correct"),
             cancelImg = UIImage(named: "cancel")
         
-        confirmButton.setBackgroundImage(verifyImg, for: .normal)
+        confirmButton.setBackgroundImage(confirmImg, for: .normal)
         cancelButton.setBackgroundImage(cancelImg, for: .normal)
         
         confirmButton.showsTouchWhenHighlighted = true
         cancelButton.showsTouchWhenHighlighted = true
         
-        let barButtonVerify = UIBarButtonItem(customView: confirmButton),
-            barButtonCancel = UIBarButtonItem(customView: cancelButton)
+        cancelBarButton.customView = cancelButton
+        confirmBarButton.customView = confirmButton
         
-        navigationItem.setLeftBarButtonItems([barButtonCancel], animated: true)
-        navigationItem.setRightBarButtonItems([barButtonVerify], animated: true)
+        navigationItem.setLeftBarButtonItems([cancelBarButton], animated: true)
+        navigationItem.setRightBarButtonItems([confirmBarButton], animated: true)
         
     }
     

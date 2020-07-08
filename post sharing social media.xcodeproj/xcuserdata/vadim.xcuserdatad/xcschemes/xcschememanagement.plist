@@ -9,10 +9,43 @@
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>
+		<key>Model.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>24</integer>
+		</dict>
 		<key>post sharing social media.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>22</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>DD58D3C624B2FE4D00E3C9EE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD65590C24AB986D0022CDC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDDF7D9924A34DEE0018E8C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDDF7DAF24A34DF10018E8C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDDF7DBA24A34DF10018E8C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

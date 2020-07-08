@@ -15,20 +15,33 @@ class HallViewController: UIViewController {
     
     var viewModelBuilder: HallViewModel.ViewModelBuilder!
     
-    fileprivate let tableView = UITableView()
+    fileprivate lazy var collectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.backgroundColor = #colorLiteral(red: 0.02188301831, green: 0.3246959746, blue: 0.6436251998, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    fileprivate lazy var layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        let width = view.bounds.size.width
+        layout.estimatedItemSize = CGSize(width: width, height: 10)
+        layout.scrollDirection = .vertical
+        return layout
+    }()
+    
     fileprivate let createPostButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
     
     fileprivate var viewModel: HallViewModel!
     
-    fileprivate let dataSource = RxTableViewSectionedAnimatedDataSource<PostSection>(configureCell: {
-        (dataSource, tableView, indexPath, post) -> PostTableViewCell in
+    fileprivate let dataSource = RxCollectionViewSectionedAnimatedDataSource<PostSection>(configureCell: {
+        (dataSource, collectionView, indexPath, post) -> PostCollectionViewCell in
         
-        let postTableViewCell = tableView.dequeueReusableCell(withIdentifier:
-            TableViewCellsConstants.postCellIdentifier, for: indexPath) as! PostTableViewCell
+        let postCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsConstants.postCellIdentifier, for: indexPath) as! PostCollectionViewCell
         
-        postTableViewCell.configureUI(withModel: post)
+        postCollectionViewCell.configureUI(withModel: post)
         
-        return postTableViewCell
+        return postCollectionViewCell
     })
     
     fileprivate let bag = DisposeBag()
@@ -39,6 +52,14 @@ class HallViewController: UIViewController {
         buildViewModel()
         setupBindings()
         setupUI()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let widthWithSafeArea = view.safeAreaLayoutGuide.layoutFrame.size.width
+        
+        layout.estimatedItemSize = CGSize(width: widthWithSafeArea, height: 10)
+        layout.invalidateLayout()
+        super.traitCollectionDidChange(previousTraitCollection)
     }
     
     fileprivate func buildViewModel() {
@@ -57,7 +78,10 @@ class HallViewController: UIViewController {
     }
     
     fileprivate func setupBindings() {
-        viewModel.output.posts.drive(tableView.rx.items(dataSource: dataSource))
+        viewModel
+            .output
+            .posts
+            .drive(collectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
     }
     
@@ -70,16 +94,14 @@ class HallViewController: UIViewController {
     }
     
     fileprivate func setupNavbarRightItems() {
-        //let img = UIImage(named: "exam")
+        // let img = UIImage(named: "exam")
+        
         createPostButton.tintColor = #colorLiteral(red: 0, green: 0.09277493507, blue: 0.2684116662, alpha: 1)
         createPostButton.title = "Add post"
         createPostButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0.07141517848, blue: 0.2006644607, alpha: 1)], for: .normal)
         
-        
         // createPostButton.setBackgroundImage(img, for: .normal)
         // createPostButton.showsTouchWhenHighlighted = true
-        
-        //
         
         // let barButton = UIBarButtonItem(customView: createPostButton)
         
@@ -87,29 +109,31 @@ class HallViewController: UIViewController {
     }
     
     fileprivate func setupTableView() {
-        view.addSubview(tableView)
-        tableView.refreshControl = UIRefreshControl()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = UIColor.white
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = false
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: TableViewCellsConstants.postCellIdentifier)
+        view.addSubview(collectionView)
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = UIColor.white
         
-        tableView.estimatedRowHeight = 150
-        tableView.rowHeight = UITableView.automaticDimension
+        collectionView.allowsSelection = false
+        collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellsConstants.postCellIdentifier)
+        
+        collectionView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.8745098039, blue: 0.8941176471, alpha: 1)
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        
+        view.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.8745098039, blue: 0.8941176471, alpha: 1)
         
         //let heightOffset = self.navigationController?.navigationBar.frame.height ?? 0.0
         
         let constrains = [
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor)]
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor)]
         NSLayoutConstraint.activate(constrains)
         
         // rx
         
-        tableView
+        collectionView
             .rx.setDelegate(self)
             .disposed(by: bag)
         
@@ -127,9 +151,12 @@ class HallViewController: UIViewController {
 
 }
 
-extension HallViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension //PostTableViewCell.calculateExpectedHeightOfViews()
-    }
+extension HallViewController: UICollectionViewDelegateFlowLayout {
+
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return CGFloat(100)
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return CGFloat(100)
+//    }
 }

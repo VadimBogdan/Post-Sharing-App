@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import RxSwift
 
-public final class FetchedResultsControllerSectionObserver<T: NSManagedObject> : NSObject, NSFetchedResultsControllerDelegate {
+public final class FetchedResultsControllerSectionObserver<T: NSFetchRequestResult> : NSObject, NSFetchedResultsControllerDelegate {
     
     typealias Observer = AnyObserver<[NSFetchedResultsSectionInfo]>
     
@@ -36,6 +36,7 @@ public final class FetchedResultsControllerSectionObserver<T: NSManagedObject> :
     
     private func sendNextElement() {
         let sections = self.frc.sections ?? []
+        
         observer.on(.next(sections))
     }
     

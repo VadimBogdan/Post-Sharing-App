@@ -19,6 +19,6 @@ struct PostTableViewCellConstants {
     public static let bodyTopToCreationDateBottom: CGFloat = 12.0
     public static let bodyLeft: CGFloat = 12.0
     public static let bodyRight: CGFloat = -60.0
-    public static let bodyBottom: CGFloat = 16.0
+    public static let bodyBottom: CGFloat = 0
 }
 

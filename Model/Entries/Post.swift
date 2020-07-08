@@ -13,26 +13,26 @@ public struct Post: Codable {
     public let title: String
     public let uuid: String
     public let userId: String
-    public let creationDate: String
+    public let createdAt: String
     
     private enum CodingKeys: String, CodingKey {
         case body
         case title
         case uuid
         case userId
-        case creationDate
+        case createdAt
     }
     
     public init(body: String,
                 title: String,
                 uuid: String,
                 userId: String,
-                creationDate: String) {
+                createdAt: String) {
         self.body = body
         self.title = title
         self.uuid = uuid
         self.userId = userId
-        self.creationDate = creationDate
+        self.createdAt = createdAt
     }
     
     public init(from decoder: Decoder) throws {
@@ -41,10 +41,10 @@ public struct Post: Codable {
         body = try container.decode(String.self, forKey: .body)
         title = try container.decode(String.self, forKey: .title)
          
-        if let creationDate = try container.decodeIfPresent(Int.self, forKey: .creationDate) {
-            self.creationDate = "\(creationDate)"
+        if let creationDate = try container.decodeIfPresent(Int.self, forKey: .createdAt) {
+            self.createdAt = "\(creationDate)"
         } else {
-            creationDate = try container.decodeIfPresent(String.self, forKey: .creationDate) ?? ""
+            createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
         }
         
         if let uuid = try container.decodeIfPresent(Int.self, forKey: .uuid) {
@@ -67,7 +67,7 @@ extension Post: Equatable & Hashable {
             lhs.userId == rhs.userId &&
             lhs.title == rhs.title &&
             lhs.body == rhs.body &&
-            lhs.creationDate == rhs.creationDate
+            lhs.createdAt == rhs.createdAt
     }
     
     public func hash(into hasher: inout Hasher) {

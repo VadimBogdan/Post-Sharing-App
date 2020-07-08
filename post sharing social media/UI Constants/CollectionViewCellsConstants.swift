@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct TableViewCellsConstants {
+struct CollectionViewCellsConstants {
     public static let postCellIdentifier = "PostCellIdentifier"
 }

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Model
+import CoreDataRepository
 import RxSwift
 import RxCocoa
 
@@ -14,17 +16,20 @@ class HallCoordinator: BaseCoordinator {
     
     let router: Router
     
+    let postsRepository: AnyRepository<Post>
+    
     let bag = DisposeBag()
     
-    init(router: Router) {
+    init(router: Router, postsRepository: AnyRepository<Post>) {
         self.router = router
+        self.postsRepository = postsRepository
     }
     
     override func start() {
         let hallVC = HallViewController()
         
-        hallVC.viewModelBuilder = { [bag, weak self] input in
-            let viewModel = HallViewModel(input: input)
+        hallVC.viewModelBuilder = { [bag, weak self, unowned postsRepository] input in
+            let viewModel = HallViewModel(input: input, postsRepository: postsRepository)
             
             input.triggerToCreatePost.map {
                 self?.toCreatePost()
@@ -43,16 +48,16 @@ extension HallCoordinator {
     
     func toCreatePost() {
         let createPostViewController = CreatePostViewController()
-        createPostViewController.viewModelBuilder = { [bag, unowned createPostViewController] input in
+        createPostViewController.viewModelBuilder = { [bag, unowned createPostViewController, unowned postsRepository] input in
             
-            let viewModel = CreatePostViewModel(input: input)
+            let viewModel = CreatePostViewModel(input: input, postsRepository: postsRepository)
             
-            input.cancelTrigger
-                 .drive(onNext:
-                    {
-                        createPostViewController.presentingViewController?.dismiss(animated: true)
-                    })
-                 .disposed(by: bag)
+            viewModel.output.dismiss
+                .do(onNext: {
+                     createPostViewController.presentingViewController?.dismiss(animated: true)
+                })
+                .drive()
+                .disposed(by: bag)
             
             return viewModel
         }

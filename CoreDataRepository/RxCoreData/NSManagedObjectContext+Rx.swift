@@ -20,13 +20,12 @@ extension Reactive where Base: NSManagedObjectContext {
      - parameter cacheName: the name of the file used to cache section information; defaults to `nil`
      - returns: An `Observable` array of `NSManagedObjects` objects that can be bound to a table view.
      */
-    func entities<C: CoreDataRepresentable>(_ type: C.Type = C.self,
-                                            fetchRequest: NSFetchRequest<C.CoreDataType>,
+    func entities<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>,
                                             sectionNameKeyPath: String? = nil,
-                                            cacheName: String? = nil) -> Observable<[C.CoreDataType]> {
+                                            cacheName: String? = nil) -> Observable<[T]> {
         
         return Observable.create { observer in
-            let observerAdapter = FetchedResultsControllerEntityObserver<C>(observer: observer, fetchRequest: fetchRequest, managedObjectContext: self.base, sectionNameKeyPath: sectionNameKeyPath, cacheName: cacheName)
+            let observerAdapter = FetchedResultsControllerEntityObserver(observer: observer, fetchRequest: fetchRequest, managedObjectContext: self.base, sectionNameKeyPath: sectionNameKeyPath, cacheName: cacheName)
             
             return Disposables.create {
                 observerAdapter.dispose()
@@ -41,7 +40,7 @@ extension Reactive where Base: NSManagedObjectContext {
      - parameter cacheName: the name of the file used to cache section information; defaults to `nil`
      - returns: An `Observable` array of `NSFetchedResultsSectionInfo` objects that can be bound to a table view.
      */
-    func sections<T: NSManagedObject>(fetchRequest: NSFetchRequest<T>,
+    func sections<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>,
                                       sectionNameKeyPath: String? = nil,
                                       cacheName: String? = nil) -> Observable<[NSFetchedResultsSectionInfo]> {
 
@@ -79,32 +78,44 @@ extension Reactive where Base: NSManagedObjectContext {
     /**
      Creates, inserts, and returns a new `NSManagedObject` instance for the given `Persistable` concrete type (defaults to `Persistable`).
      */
-    private func create<C: CoreDataRepresentable>(_ type: C.Type = C.self) -> C.CoreDataType {
-        return NSEntityDescription.insertNewObject(forEntityName: C.CoreDataType.entityName, into: self.base) as! C.CoreDataType
+    private func create<T: Persistable>(ofType: T.Type = T.self) -> T {
+        return NSEntityDescription.insertNewObject(forEntityName: T.entityName, into: self.base) as! T
     }
     
-    private func get<C: CoreDataRepresentable>(_ entityRepresentable: C) throws -> C.CoreDataType? {
-        let fetchRequest: NSFetchRequest<C.CoreDataType> = NSFetchRequest(entityName: C.CoreDataType.entityName)
-        fetchRequest.predicate = C.CoreDataType.predicate()
-        let result = (try self.base.execute(fetchRequest)) as! NSAsynchronousFetchResult<C.CoreDataType>
+    private func get<T: Persistable>(_ uuid: String?) throws -> T? {
+        let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
+        fetchRequest.predicate = T.primaryAttribute == uuid
+        let result = (try self.base.execute(fetchRequest)) as! NSAsynchronousFetchResult<T>
         return result.finalResult?.first
     }
     
     /**
-     Attempts to retrieve  remove a `Persistable` object from a persistent store, and then attempts to commit that change or throws an error if unsuccessful.
+     Attempts to retrieve  remove a `NSManagedObject` object from a persistent store, and then attempts to commit that change or throws an error if unsuccessful.
      - seealso: `Persistable`
      - parameter persistable: a `Persistable` object
      */
-    func delete<C: CoreDataRepresentable>(_ entityRepresentable: C) throws {
+    func delete<T: NSManagedObject>(_ entity: T) throws -> Observable<Void> {
         
-        if let entity = try get(entityRepresentable) as? NSManagedObject {
-            self.base.delete(entity)
-            
+        self.base.delete(entity)
+        
+        do {
+            try entity.managedObjectContext?.save()
+            return Observable.just(())
+        } catch let e {
+            return Observable.error(e)
+        }
+        
+    }
+    
+    func save() -> Observable<Void> {
+        return Observable.create { observer in
             do {
-                try entity.managedObjectContext?.save()
-            } catch let e {
-                print(e)
+                try self.base.save()
+                observer.onNext(())
+            } catch {
+                observer.onError(error)
             }
+            return Disposables.create()
         }
     }
     
@@ -116,24 +127,26 @@ extension Reactive where Base: NSManagedObjectContext {
      - parameter sortDescriptors: the sort descriptors for the fetch request; defaults to `nil`
      - returns: An `Observable` array of `Persistable` objects that can be bound to a table view.
      */
-    func entities<C: CoreDataRepresentable>(_ type: C.Type = C.self,
-                                  predicate: NSPredicate? = nil,
-                                  sortDescriptors: [NSSortDescriptor]? = nil) -> Observable<[C]> {
-        
-        let fetchRequest: NSFetchRequest<C.CoreDataType> = NSFetchRequest(entityName: C.CoreDataType.entityName)
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = sortDescriptors ?? [C.CoreDataType.primaryAttribute.ascending()]
-        
-        return entities(C.self, fetchRequest: fetchRequest).map { $0.map(C.init) }
-    }
-    
+//    func entities<C: CoreDataRepresentable>(_ type: C.Type = C.self,
+//                                  predicate: NSPredicate? = nil,
+//                                  sortDescriptors: [NSSortDescriptor]? = nil) -> Observable<[C]> {
+//        
+//        let fetchRequest: NSFetchRequest<C.CoreDataType> = NSFetchRequest(entityName: C.CoreDataType.entityName)
+//        fetchRequest.predicate = predicate
+//        fetchRequest.sortDescriptors = sortDescriptors ?? [C.CoreDataType.primaryAttribute.ascending()]
+//        
+//        return entities(C.self, fetchRequest: fetchRequest).map { $0.map(C.init) }
+//    }
     /**
-     Attempts to fetch and update (or create if not found) a `Persistable` instance. Will throw error if fetch fails.
-     - parameter persistable: a `Persistable` instance
+     - parameter uuid: the unique entity's identifier if it has one
      */
-    func update<C: CoreDataRepresentable, P>(_ representableEntity: C, update closure: (P) -> Void) throws where C.CoreDataType == P {
-        // let predicate: NSPredicate = P.primaryAttribute == representableEntity.uid
-        representableEntity.update(try get(representableEntity) ?? self.create(C.self))
+    func sync<P>(uuid: String? = nil) -> Observable<P> where P: Persistable {
+        do {
+            let managedObject = try get(uuid) ?? create(ofType: P.self)
+            return Observable.just(managedObject)
+        } catch {
+            return Observable.error(error)
+        }
     }
     
 }
